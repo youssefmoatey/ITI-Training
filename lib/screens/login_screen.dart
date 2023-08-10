@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lab_4/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginPageState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
@@ -79,6 +81,11 @@ class _LoginPageState extends State<LoginScreen> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                       setEmail() async {
+                        final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setString('email', emailController.text);
+                      }
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab_4/screens/page1_home.dart';
 import 'package:lab_4/screens/page2_articales.dart';
 import 'package:lab_4/screens/page3_videos.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.email});
@@ -12,6 +13,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? email;
+  getCachEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = prefs.getString('email') ?? 'null';
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+   
+    super.initState();
+    getCachEmail();
+  }
+
   int currentIndex = 0;
   List<Widget> pages = [
     const Page1(),
@@ -20,13 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Screen'),
       ),
-      // body: Center(child: Text(widget.email)),
-      body: pages[currentIndex],
+      body: Column(children: [
+        Center(child: Text(widget.email)),
+        pages[currentIndex],
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         items: const [
