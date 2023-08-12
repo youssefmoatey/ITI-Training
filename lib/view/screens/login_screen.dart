@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:lab_4/screens/home_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of '../../utils/import-pass/import_pass.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,7 +9,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginPageState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
@@ -60,7 +58,6 @@ class _LoginPageState extends State<LoginScreen> {
                     if (value == null || value.length < 8) {
                       return 'Please enter valid password';
                     }
-                    return null;
                     // return null;
                   },
                   decoration: const InputDecoration(
@@ -79,13 +76,14 @@ class _LoginPageState extends State<LoginScreen> {
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                       setEmail() async {
-                        final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.setString('email', emailController.text);
-                      }
+                      // to save email
+
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setString('email', emailController.text);
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
