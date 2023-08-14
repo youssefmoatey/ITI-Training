@@ -8,27 +8,34 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  List<ToDoModel> todoList = [];
-  getMyTodo() async {
-    todoList = await ToDoService().getTodo();
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getMyTodo();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(todoList[index].title ?? '--'),
-            trailing: Text((todoList[index].id).toString()),
-          );
-        });
+    return BlocProvider(
+      create: (context) => TodoCubit(),
+      child: BlocConsumer<TodoCubit, TodoState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is TodoLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is TodoError) {
+            return const Center(
+              child: Text("Error"),
+            );
+          }
+          return ListView.builder(
+              itemCount: context.watch<TodoCubit>().toDoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Text((context.watch<TodoCubit>().toDoList[index].id).toString()),
+                  title: Text(context.watch<TodoCubit>().toDoList[index].title ?? '--'),
+                  trailing: Text((context.watch<TodoCubit>().toDoList[index].completed).toString()),
+                );
+              });
+        },
+      ),
+    );
   }
 }
