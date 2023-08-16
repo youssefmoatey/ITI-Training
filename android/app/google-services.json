@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061874818606",
+    "project_id": "iti-training-244ec",
+    "storage_bucket": "iti-training-244ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061874818606:android:aed0b68df08363bbbbc9bf",
+        "android_client_info": {
+          "package_name": "com.example.lab_4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061874818606-37usl2aeoibih5fg6dbhji4ia3tvp1v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmklqv5czImE85jwqrNaNsrzd_dGIu3NA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061874818606-37usl2aeoibih5fg6dbhji4ia3tvp1v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,7 @@ class _LoginPageState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 179, 176, 176),
       body: Padding(
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 // TextField to password
                 TextFormField(
+                  controller: passwordController,
                   validator: (value) {
                     if (value == null || value.length < 8) {
                       return 'Please enter valid password';
@@ -80,20 +82,27 @@ class _LoginPageState extends State<LoginScreen> {
                     if (_formKey.currentState!.validate()) {
                       // to save email
 
-                      final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setString('email', emailController.text);
+                      bool result = await fireBaseLogin(
+                          emailController.text, passwordController.text);
+                      if (result == true) {
+                        final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.setString('email', emailController.text);
 
-                      Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomeScreen(
-                              email: emailController.text,
-                            ),
-                          ));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('You Submitted')),
-                      );
+                              builder: (context) => HomeScreen(
+                                    email: emailController.text,
+                                  )),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Login faild"),
+                          ),
+                        );
+                      }
                     }
                   },
                   child: const Text('Login'),
@@ -121,5 +130,25 @@ class _LoginPageState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<bool> fireBaseLogin(String email, String password) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user != null) {
+        return true;
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    return false;
   }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1061874818606-t503k31fnphgnilg2s2ms14b0sdr2odo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1061874818606-t503k31fnphgnilg2s2ms14b0sdr2odo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC5lHKQbtJQ8sQYkulUdHaQbS--KLxrn3c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1061874818606</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.lab4</string>
+	<key>PROJECT_ID</key>
+	<string>iti-training-244ec</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iti-training-244ec.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1061874818606:ios:174062a4dc36c02abbc9bf</string>
+</dict>
+</plist>
